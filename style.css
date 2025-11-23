@@ -1,0 +1,730 @@
+/* --- 1. CSS Variables & Reset --- */
+:root {
+    --primary-color: #ff6600;
+    /* สีส้มหลัก */
+    --primary-hover: #e65c00;
+
+    /* Dark Theme Default */
+    --bg-body: #252526;
+    --bg-sidebar: #1e1e1e;
+    --bg-card: #333333;
+    --bg-input: #444444;
+    --text-main: #eeeeee;
+    --text-muted: #b0b0b0;
+    --border-color: #444444;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Light Theme Overrides */
+[data-theme="light"] {
+    --bg-body: #f0f2f5;
+    --bg-sidebar: #ffffff;
+    --bg-card: #ffffff;
+    --bg-input: #f0f2f5;
+    --text-main: #333333;
+    --text-muted: #65676b;
+    --border-color: #e4e6eb;
+    --shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Basic Reset */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Kanit', sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    display: flex;
+    min-height: 100vh;
+    /* Transition สำหรับการเปลี่ยนธีม */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* --- 2. Sidebar Layout --- */
+.sidebar {
+    width: 250px;
+    background-color: var(--bg-sidebar);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    flex-shrink: 0;
+    /* Transition สำหรับ Sidebar */
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.sidebar .logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.menu-item {
+    display: block;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: 8px;
+    /* Transition สำหรับ Menu Item Hover */
+    transition: background-color 0.2s, color 0.2s;
+    font-weight: 400;
+}
+
+.menu-item:hover {
+    background-color: var(--bg-card);
+    color: var(--text-main);
+}
+
+.menu-item.active {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+}
+
+.menu-item.active:hover {
+    background-color: var(--primary-hover);
+}
+
+/* --- 3. Main Content & Header --- */
+
+/* Keyframes สำหรับ Fade-in Effect (ความสมูทในการเปลี่ยนหน้า) */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+    /* ใช้ Animation เมื่อหน้าโหลดเสร็จ */
+    animation: fadeIn 0.5s ease-out;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.user-info h2 {
+    margin: 0 0 5px 0;
+    font-size: 1.5rem;
+}
+
+.user-info p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.user-stats {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* *** แก้ไขปุ่มสลับธีมให้เป็นวงกลมและสวยงาม *** */
+.theme-toggle-btn {
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+
+    /* กำหนดขนาดและจัดวางให้เป็นวงกลม */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    /* ลบ padding เดิมออก */
+
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+    margin-right: 20px;
+}
+
+.theme-toggle-btn:hover {
+    background-color: var(--bg-input);
+}
+
+/* **************************************** */
+
+/* Card Styles (ใช้สำหรับ Post Card และ Card Item) */
+.post-card,
+.card-item {
+    background-color: var(--bg-card);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.card-item {
+    text-align: center;
+    padding: 30px 20px;
+    cursor: pointer;
+    /* Transition สำหรับ Hover Effects โดยเฉพาะ */
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
+}
+
+.card-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-item h4 {
+    margin: 5px 0 10px 0;
+    font-weight: 600;
+}
+
+/* Grid Layout */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Action Button */
+.btn-action {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s, transform 0.1s;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 15px;
+}
+
+.btn-action:hover {
+    background-color: var(--primary-hover);
+}
+
+
+/* --- 4. Post Form Styles --- */
+.create-post-container textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-input);
+    color: var(--text-main);
+    resize: vertical;
+    box-sizing: border-box;
+    font-family: 'Kanit', sans-serif;
+}
+
+/* File Input */
+#mediaFile {
+    padding: 8px 0;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+
+/* --- 5. Custom Alert (Modal/Center Notification) Styles --- */
+#customAlert {
+    position: fixed;
+
+    /* *** ตำแหน่งกลางจอ *** */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    z-index: 2000;
+    padding: 20px 30px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+
+    /* ซ่อนเริ่มต้น */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+
+    min-width: 350px;
+    max-width: 90%;
+}
+
+/* เมื่อมี class 'alert-show' */
+#customAlert.alert-show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* สีตามประเภทการแจ้งเตือน */
+.alert-success {
+    background-color: #3fcf2e;
+}
+
+.alert-info {
+    background-color: #007bff;
+}
+
+.alert-error {
+    background-color: #dc3545;
+}
+
+/* --- 6. Responsive Design --- */
+@media (max-width: 992px) {
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 15px;
+        box-shadow: none;
+    }
+
+    .sidebar .logo {
+        display: none;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .sidebar a {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .user-stats {
+        margin-top: 10px;
+    }
+
+    .theme-toggle-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+}
+
+/* --- 7. Chatbot Specific Styles (NEW) --- */
+
+.message {
+    padding: 10px 15px;
+    border-radius: 18px;
+    max-width: 80%;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    /* เพื่อจัดการคำยาวๆ */
+}
+
+/* User Message Bubble (ข้อความของผู้ใช้) */
+.user-message {
+    background-color: var(--primary-color);
+    color: white;
+    margin-left: auto;
+    /* ดันไปทางขวา */
+    border-bottom-right-radius: 4px;
+    /* มุมขวาล่างแหลมเล็กน้อย */
+}
+
+/* Bot Message Bubble (ข้อความของบอท) */
+.bot-message {
+    background-color: var(--bg-input);
+    color: var(--text-main);
+    margin-right: auto;
+    /* ดันไปทางซ้าย */
+    border-bottom-left-radius: 4px;
+    /* มุมซ้ายล่างแหลมเล็กน้อย */
+}
+
+/* เพื่อให้ข้อความแรกของบอทดูสวยงาม */
+#chat-window .message:first-child {
+    margin-top: 5px;
+}
+
+/* ... (โค้ดเดิมทั้งหมด) ... */
+
+/* -------------------------------------------------------------------------------------- */
+/* --- 10. Comment System Styles (NEW) --- */
+/* -------------------------------------------------------------------------------------- */
+
+.comments-section {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+}
+
+.comment-list {
+    margin-bottom: 15px;
+    max-height: 300px;
+    /* จำกัดความสูง ถ้าคอมเมนต์เยอะให้เลื่อนดู */
+    overflow-y: auto;
+}
+
+.comment-item {
+    background-color: var(--bg-input);
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    font-size: 0.8rem;
+}
+
+.comment-user {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.comment-time {
+    color: var(--text-muted);
+}
+
+.comment-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.comment-input {
+    flex-grow: 1;
+    padding: 8px 12px;
+    border-radius: 20px;
+    /* ทำเป็นทรงรี */
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    outline: none;
+    font-family: 'Kanit', sans-serif;
+}
+
+.comment-input:focus {
+    border-color: var(--primary-color);
+}
+
+.btn-comment-submit {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 5px;
+    transition: transform 0.2s;
+}
+
+.btn-comment-submit:hover {
+    transform: scale(1.1);
+    color: var(--primary-hover);
+}
+
+/* -------------------------------------------------------------------------------------- */
+/* --- 11. Mobile Responsive Styles (Media Queries) --- */
+/* -------------------------------------------------------------------------------------- */
+
+/* สำหรับหน้าจอขนาดเล็ก (มือถือ/แท็บเล็ตแนวตั้ง) ที่กว้างไม่เกิน 992px */
+@media (max-width: 992px) {
+
+    /* 1. ปรับ Layout หลัก */
+    body {
+        flex-direction: column;
+        /* เปลี่ยนจากซ้าย-ขวา เป็น บน-ล่าง */
+        height: auto;
+        /* ยกเลิกความสูง fix */
+        overflow-y: auto;
+        /* ให้เลื่อนหน้าจอได้ปกติ */
+    }
+
+    /* 2. ปรับ Sidebar ให้เป็นเมนูแนวนอนด้านบน (เลื่อนซ้าย-ขวาได้) */
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        /* ไม่ Fix อยู่กับที่แล้ว */
+        flex-direction: row;
+        /* เรียงเมนูแนวนอน */
+        overflow-x: auto;
+        /* ให้เลื่อนนิ้วซ้ายขวาได้ถ้ารายการเยอะ */
+        padding: 10px;
+        white-space: nowrap;
+        /* ห้ามตัดคำ */
+        border-bottom: 1px solid var(--border-color);
+        z-index: 100;
+    }
+
+    .sidebar .logo {
+        display: none;
+        /* ซ่อนโลโก้ในแถบเมนูเพื่อประหยัดที่ */
+    }
+
+    .sidebar a.menu-item {
+        display: inline-block;
+        margin-right: 10px;
+        margin-bottom: 0;
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+        /* ไม่ให้ปุ่มหดตัว */
+    }
+
+    /* 3. ปรับ Main Content */
+    .main-content {
+        padding: 15px;
+        /* ลด Padding ด้านข้าง */
+        width: 100%;
+        margin-left: 0;
+    }
+
+    /* 4. ปรับ Header */
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        position: relative;
+    }
+
+    .theme-toggle-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    /* 5. ปรับ Grid (การ์ดต่างๆ) ให้เหลือ 1 คอลัมน์เต็มจอ */
+    .grid-container {
+        grid-template-columns: 1fr;
+        /* 1 คอลัมน์เต็ม */
+    }
+
+    /* 6. ปรับ Hero Section (หน้า Home) */
+    .hero-section {
+        height: 250px;
+        /* ลดความสูงลง */
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+        /* ลดขนาดฟอนต์หัวข้อ */
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    /* 7. ปรับ Custom Alert (กล่องแจ้งเตือน) */
+    #customAlert {
+        width: 85%;
+        /* ให้กว้างเกือบเต็มจอ */
+        min-width: auto;
+        padding: 15px;
+        font-size: 0.9rem;
+        /* จัดกึ่งกลางแบบ Mobile */
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        /* ย้ายจุดศูนย์กลาง */
+    }
+
+    /* 8. ปรับ Chatbot Window */
+    #chat-window {
+        height: 60vh;
+        /* ให้สูงพอดีหน้าจอมือถือ */
+    }
+
+    /* 9. ปรับตารางสินค้า (Shop) */
+    .product-image {
+        height: 200px;
+        /* ให้รูปสินค้าใหญ่ชัดเจน */
+    }
+}
+
+/* สำหรับหน้าจอเล็กมากๆ (มือถือรุ่นเก่า) */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .btn-action {
+        font-size: 0.9rem;
+    }
+}
+
+/* -------------------------------------------------------------------------------------- */
+/* --- 12. Mobile Hamburger Menu Styles (NEW) --- */
+/* -------------------------------------------------------------------------------------- */
+
+/* 1. ตั้งค่าปกติ (จอคอม): ซ่อนปุ่มเมนู */
+.menu-toggle {
+    display: none;
+}
+
+/* 2. ตั้งค่าเมื่อจอเล็ก (มือถือ/แท็บเล็ต): โชว์ปุ่ม และซ่อน Sidebar */
+@media (max-width: 992px) {
+
+    /* โชว์ปุ่ม 3 ขีด มุมซ้ายบน */
+    .menu-toggle {
+        display: block;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 2000;
+        /* อยู่เหนือทุกอย่าง */
+        background-color: var(--bg-card);
+        /* มีพื้นหลังหน่อยจะได้อ่านง่าย */
+        color: var(--primary-color);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 5px 12px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    /* ปรับ Sidebar ให้ซ่อนตัวไปทางซ้าย */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        height: 100vh;
+        z-index: 1500;
+        transition: left 0.3s ease-in-out;
+
+        /* *** บังคับให้เป็นแนวตั้ง *** */
+        width: 260px !important;
+        flex-direction: column !important;
+        /* บังคับเรียงลงมา */
+        padding: 20px !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        background-color: var(--bg-sidebar);
+        border-right: 1px solid var(--border-color);
+
+        /* รีเซ็ตค่า flex-wrap เผื่อมีผลจากโค้ดเก่า */
+        flex-wrap: nowrap !important;
+    }
+
+    /* จัดการลิงก์ข้างในให้เป็นบล็อก (เต็มบรรทัด) ไม่ใช่ inline-block */
+    .sidebar a.menu-item {
+        display: block !important;
+        /* เต็มบรรทัด */
+        width: 100% !important;
+        margin-bottom: 5px !important;
+        margin-right: 0 !important;
+    }
+
+    /* คลาสพิเศษ: เมื่อมีคลาส .active ให้เลื่อน Sidebar กลับมา */
+    .sidebar.active {
+        left: 0;
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+        /* เพิ่มเงาให้ดูมีมิติ */
+    }
+
+    /* ปรับ Main Content ให้เว้นที่หัวบนนิดหน่อยสำหรับปุ่ม */
+    .main-content {
+        padding-top: 70px;
+        margin-left: 0;
+        /* ไม่ต้องเว้นที่ด้านซ้ายแล้ว */
+        width: 100%;
+    }
+
+    /* คืนค่า Logo ใน Sidebar ให้แสดงผล (เผื่อถูกซ่อนจากโค้ดเก่า) */
+    .sidebar .logo {
+        display: block;
+    }
+
+    /* ปรับ Header ให้เรียงสวยงามในมือถือ */
+    header {
+        align-items: flex-end;
+        /* จัดชิดขวา */
+        text-align: right;
+    }
+}
+/* -------------------------------------------------------------------------------------- */
+/* --- 13. Disclaimer Box Styles (กล่องแจ้งเตือนด้านล่าง) --- */
+/* -------------------------------------------------------------------------------------- */
+
+#disclaimerBox {
+    position: fixed;       /* ให้ลอยอยู่หน้าจอเสมอ ไม่หายไปไหน */
+    bottom: 20px;          /* ห่างจากขอบล่าง 20px */
+    left: 50%;             /* เริ่มที่กึ่งกลางจอ */
+    transform: translateX(-50%); /* ดึงกลับมาให้กลางเป๊ะๆ */
+    
+    z-index: 9999;         /* ให้อยู่บนสุดเหนือทุกอย่าง */
+    
+    background-color: var(--bg-card); /* สีพื้นหลัง (เปลี่ยนตามธีมมืด/สว่างเอง) */
+    color: var(--text-main);          /* สีตัวหนังสือ (เปลี่ยนตามธีมเอง) */
+    border: 1px solid var(--border-color); /* เส้นขอบ (เปลี่ยนตามธีมเอง) */
+    
+    padding: 12px 25px;    /* ระยะห่างข้อความกับขอบกล่อง */
+    border-radius: 50px;   /* ทำมุมโค้งมนสวยๆ */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* เงาให้ดูลอยเด่น */
+    
+    text-align: center;
+    font-size: 0.9rem;
+    width: auto;           /* ความกว้างตามข้อความ */
+    max-width: 90%;        /* แต่ไม่เกิน 90% ของจอ (กันล้นในมือถือ) */
+    
+    /* เพิ่ม Animation ตอนโผล่มานิดนึง */
+    animation: slideUp 0.5s ease-out;
+}
+
+/* Animation เลื่อนขึ้นมาจากด้านล่าง */
+@keyframes slideUp {
+    from { transform: translate(-50%, 100%); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+/* ปรับแต่งสำหรับมือถือเล็กๆ ให้ตัวหนังสือเล็กลงนิดหน่อย */
+@media (max-width: 480px) {
+    #disclaimerBox {
+        font-size: 0.8rem;
+        padding: 10px 15px;
+        width: 85%;
+    }
+}
+/* --- 14. Logout Button Styles (ปุ่มออกจากระบบ) --- */
+
+.logout-btn {
+    margin-top: auto !important; /* ดันลงไปล่างสุดแน่นอน */
+    color: #dc3545 !important;   /* สีแดง */
+    border: 1px solid #dc3545;
+    transition: all 0.2s;
+}
+
+.logout-btn:hover {
+    background-color: #dc3545 !important;
+    color: white !important;
+}
+
+/* บังคับให้ Sidebar เป็น Flexbox เสมอ เพื่อให้ margin-top: auto ทำงาน */
+.sidebar {
+    display: flex !important;
+    flex-direction: column !important;
+}

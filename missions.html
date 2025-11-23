@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ภารกิจ (Missions) - 24hCarFix6</title>
+    <link rel="icon" href="/CarLogo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-theme="dark">
+
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+    <nav class="sidebar">
+        <div class="logo">🚗 24hCarFix6</div>
+        <a href="home.html" class="menu-item">🏠 หน้าหลัก (Home)</a>
+        <a href="index.html" class="menu-item">📰 ฟีดชุมชน (Feed)</a>
+        <a href="missions.html" class="menu-item active">🎯 ภารกิจ (Missions)</a>
+        <a href="rewards.html" class="menu-item">🎁 แลกรางวัล (Rewards)</a>
+        <a href="chatbot.html" class="menu-item">💬 แชทบอท (Chatbot)</a>
+        <a href="minigame.html" class="menu-item">🕹️ มินิเกม (Mini Games)</a>
+        <a href="car_health.html" class="menu-item">💖 สุขภาพรถ (Car Health)</a>
+        <a href="shop.html" class="menu-item">🛒 ร้านค้า (Shop)</a>
+        <a href="profile.html" class="menu-item">👤 โปรไฟล์ของฉัน (My Profile)</a>
+        <a href="#" onclick="logout()" class="menu-item logout-btn">
+            🚪 ออกจากระบบ
+        </a>
+    </nav>
+
+    <main class="main-content">
+
+        <header>
+            <button onclick="toggleTheme()" class="theme-toggle-btn" id="theme-toggle-btn">
+                <span id="theme-icon"></span>
+            </button>
+            <div class="user-info">
+                <h2>ภารกิจ</h2>
+                <p>ทำภารกิจเพื่อรับแต้ม และนำไปแลกรางวัล</p>
+            </div>
+            <div class="user-stats">
+                💎 <span id="userPoints">0</span> แต้ม
+            </div>
+        </header>
+
+        <section id="missions" class="page-section active">
+            <h3>ภารกิจที่สามารถทำได้</h3>
+            <div class="grid-container">
+
+                <div class="card-item">
+                    <div style="font-size: 40px;">📅</div>
+                    <h4>เช็คอินวันนี้</h4>
+                    <p>รับแต้มเมื่อเข้าสู่ระบบ</p>
+                    <p style="font-weight: bold; color: var(--primary-color);">+50 แต้ม</p>
+                    <button class="btn-action" onclick="addPoints(50)">รับแต้ม</button>
+                </div>
+
+                <div class="card-item">
+                    <div style="font-size: 40px;">📸</div>
+                    <h4>โพสต์รูปรถ</h4>
+                    <p>โพสต์รูปในฟีดเป็นครั้งแรก</p>
+                    <p style="font-weight: bold; color: var(--primary-color);">+100 แต้ม</p>
+                    <button class="btn-action" onclick="addPoints(100)">รับแต้ม</button>
+                </div>
+
+                <div class="card-item">
+                    <div style="font-size: 40px;">👍</div>
+                    <h4>กด Like 5 โพสต์</h4>
+                    <p>ให้กำลังใจเพื่อนๆ ในชุมชน</p>
+                    <p style="font-weight: bold; color: var(--primary-color);">+75 แต้ม</p>
+                    <button class="btn-action" onclick="addPoints(75)">รับแต้ม</button>
+                </div>
+
+                <div class="card-item">
+                    <div style="font-size: 40px;">💬</div>
+                    <h4>คอมเมนต์ 3 โพสต์</h4>
+                    <p>มีส่วนร่วมในการสนทนา</p>
+                    <p style="font-weight: bold; color: var(--primary-color);">+60 แต้ม</p>
+                    <button class="btn-action" onclick="addPoints(60)">รับแต้ม</button>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หน้าหลัก (Home) - 24hCarFix6</title>
+    <link rel="icon" href="/CarLogo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* --- Hero Section Styles (เฉพาะหน้านี้) --- */
+        .hero-section {
+            width: 100%;
+            height: 400px;
+            background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .btn-hero {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-hero:hover {
+            transform: scale(1.05);
+            background: var(--primary-hover);
+        }
+    </style>
+</head>
+
+<body data-theme="dark">
+
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="logo">🚗 24hCarFix6</div>
+        <a href="home.html" class="menu-item active">🏠 หน้าหลัก (Home)</a>
+        <a href="index.html" class="menu-item">📰 ฟีดชุมชน (Feed)</a>
+        <a href="missions.html" class="menu-item">🎯 ภารกิจ (Missions)</a>
+        <a href="rewards.html" class="menu-item">🎁 แลกรางวัล (Rewards)</a>
+        <a href="chatbot.html" class="menu-item">💬 แชทบอท (Chatbot)</a>
+        <a href="minigame.html" class="menu-item">🕹️ มินิเกม (Mini Games)</a>
+        <a href="car_health.html" class="menu-item">💖 สุขภาพรถ (Car Health)</a>
+        <a href="shop.html" class="menu-item">🛒 ร้านค้า (Shop)</a>
+        <a href="profile.html" class="menu-item">👤 โปรไฟล์ของฉัน (My Profile)</a>
+        <a href="#" onclick="logout()" class="menu-item logout-btn">
+            🚪 ออกจากระบบ
+        </a>
+    </nav>
+
+    <main class="main-content">
+
+        <header>
+            <button onclick="toggleTheme()" class="theme-toggle-btn" id="theme-toggle-btn">
+                <span id="theme-icon"></span>
+            </button>
+            <div class="user-info">
+                <h2>ยินดีต้อนรับ, Guest</h2>
+                <p>เริ่มต้นวันใหม่กับการดูแลรถที่คุณรัก</p>
+            </div>
+            <div class="user-stats">
+                💎 <span id="userPoints">0</span> แต้ม
+            </div>
+        </header>
+
+        <div class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">24h CarFix Center</h1>
+                <p class="hero-subtitle">ดูแลรถของคุณตลอด 24 ชั่วโมง ครบจบในที่เดียว</p>
+                <a href="shop.html" class="btn-hero">ช้อปสินค้าเลย 🛒</a>
+            </div>
+        </div>
+
+        <section id="dashboard" class="page-section active">
+            <h3 style="margin-bottom: 20px;">Dashboard ภาพรวม</h3>
+            <div class="grid-container">
+
+                <div class="card-item dashboard-card" onclick="window.location.href='missions.html'">
+                    <div style="font-size: 30px; color: var(--primary-color);">🎯</div>
+                    <h4>ภารกิจคงเหลือ</h4>
+                    <p style="font-size: 2.5rem; font-weight: 600;">4 ภารกิจ</p>
+                    <p class="text-muted">รับแต้มก่อนหมดวัน!</p>
+                </div>
+
+                <div class="card-item dashboard-card" onclick="window.location.href='rewards.html'">
+                    <div style="font-size: 30px; color: #3fcf2e;">🎁</div>
+                    <h4>ของรางวัลที่รอแลก</h4>
+                    <p style="font-size: 2.5rem; font-weight: 600;">0 รายการ</p>
+                    <p class="text-muted">แต้มถึงแล้วแลกได้เลย</p>
+                </div>
+
+                <div class="card-item dashboard-card" onclick="window.location.href='index.html'">
+                    <div style="font-size: 30px; color: #007bff;">💬</div>
+                    <h4>โพสต์ในชุมชน</h4>
+                    <p style="font-size: 2.5rem; font-weight: 600;">1 โพสต์</p>
+                    <p class="text-muted">ความเคลื่อนไหวล่าสุด (วันนี้)</p>
+                </div>
+
+                <div class="card-item dashboard-card" onclick="window.location.href='chatbot.html'">
+                    <div style="font-size: 30px; color: #ff9800;">🧠</div>
+                    <h4>ผู้ช่วย AI</h4>
+                    <p style="font-size: 2.5rem; font-weight: 600;">พร้อมใช้งาน</p>
+                    <p class="text-muted">ถามคำถามได้ทันที</p>
+                </div>
+
+            </div>
+
+            <h3 style="margin-top: 40px;">คำเตือน</h3>
+            <div class="post-card">
+                <p>🔥 **คำเตือน:** ห้ามเล่นโทรศัพท์ในขณะขับรถ เด็ดขาด!!</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // โค้ดสำหรับอัปเดตแต้มและธีมเมื่อโหลดหน้า
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof updateUI === "function") {
+                updateUI();
+            }
+        });
+    </script>
+</body>
+
+</html>

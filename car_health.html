@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สุขภาพรถ (Car Health) - 24hCarFix6</title>
+    <link rel="icon" href="/CarLogo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* สไตล์สำหรับ Progress Bar (ใช้สำหรับแสดง % สุขภาพ) */
+        .health-bar-container {
+            width: 100%;
+            background-color: var(--bg-input);
+            border-radius: 4px;
+            margin-top: 5px;
+            height: 15px;
+        }
+
+        .health-bar {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+            text-align: right;
+            line-height: 15px;
+            font-size: 10px;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body data-theme="dark">
+
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+    <nav class="sidebar">
+        <div class="logo">🚗 24hCarFix6</div>
+        <a href="home.html" class="menu-item">🏠 หน้าหลัก (Home)</a>
+        <a href="index.html" class="menu-item">📰 ฟีดชุมชน (Feed)</a>
+        <a href="missions.html" class="menu-item">🎯 ภารกิจ (Missions)</a>
+        <a href="rewards.html" class="menu-item">🎁 แลกรางวัล (Rewards)</a>
+        <a href="chatbot.html" class="menu-item">💬 แชทบอท (Chatbot)</a>
+        <a href="minigame.html" class="menu-item">🕹️ มินิเกม (Mini Games)</a>
+        <a href="car_health.html" class="menu-item">💖 สุขภาพรถ (Car Health)</a>
+        <a href="shop.html" class="menu-item">🛒 ร้านค้า (Shop)</a>
+        <a href="profile.html" class="menu-item">👤 โปรไฟล์ของฉัน (My Profile)</a>
+        <a href="#" onclick="logout()" class="menu-item logout-btn">
+            🚪 ออกจากระบบ
+        </a>
+    </nav>
+
+    <main class="main-content">
+
+        <header>
+            <button onclick="toggleTheme()" class="theme-toggle-btn" id="theme-toggle-btn">
+                <span id="theme-icon"></span>
+            </button>
+            <div class="user-info">
+                <h2>สุขภาพรถ</h2>
+                <p>สถานะแบบเรียลไทม์ของรถของคุณ</p>
+            </div>
+            <div class="user-stats">
+                💎 <span id="userPoints">0</span> แต้ม
+            </div>
+        </header>
+
+        <section id="car-health-dashboard" class="page-section active">
+
+            <div class="grid-container">
+                <div class="card-item" style="text-align: center;">
+                    <div style="font-size: 50px;">🩺</div>
+                    <h4>คะแนนสุขภาพโดยรวม</h4>
+                    <p style="font-size: 3rem; font-weight: bold; color: #3fcf2e;" id="totalHealthScore">92%</p>
+                    <p class="text-muted">สถานะ: ดีเยี่ยม (Excellent)</p>
+                </div>
+
+                <div class="card-item">
+                    <div style="font-size: 30px;">🛣️</div>
+                    <h4>ระยะทางที่วิ่งมา</h4>
+                    <p style="font-size: 2rem; font-weight: 600;">85,450 km</p>
+                    <p class="text-muted">กำหนดเข้าศูนย์ครั้งถัดไป: 90,000 km</p>
+                </div>
+
+                <div class="card-item">
+                    <div style="font-size: 30px; color: var(--primary-color);">⚠️</div>
+                    <h4>การแจ้งเตือน</h4>
+                    <p style="font-size: 2rem; font-weight: 600; color: var(--primary-color);" id="issueCount">1 รายการ
+                    </p>
+                    <p class="text-muted">⚠️ ยางหน้าซ้ายลมยางอ่อน</p>
+                </div>
+
+            </div>
+
+            <h3 style="margin-top: 40px;">สถานะระบบสำคัญ</h3>
+            <div class="grid-container">
+
+                <div class="card-item">
+                    <h4>เครื่องยนต์และระบบส่งกำลัง</h4>
+                    <div class="health-bar-container">
+                        <div class="health-bar" style="width: 95%; background-color: #3fcf2e;">95%</div>
+                    </div>
+                    <p class="text-muted" style="margin-top: 10px;">ล่าสุด: อุณหภูมิปกติ, ไม่พบรหัสข้อผิดพลาด (DTC)</p>
+                </div>
+
+                <div class="card-item">
+                    <h4>ระบบเบรก</h4>
+                    <div class="health-bar-container">
+                        <div class="health-bar" style="width: 85%; background-color: #007bff;">85%</div>
+                    </div>
+                    <p class="text-muted" style="margin-top: 10px;">ผ้าเบรกเหลือ 60% (ด้านหน้า)</p>
+                </div>
+
+                <div class="card-item">
+                    <h4>แบตเตอรี่</h4>
+                    <div class="health-bar-container">
+                        <div class="health-bar" style="width: 70%; background-color: #ff9800;">70%</div>
+                    </div>
+                    <p class="text-muted" style="margin-top: 10px;">ความจุไฟ: 12.3 V (ควรตรวจเช็คเมื่อต่ำกว่า 12.0 V)
+                    </p>
+                </div>
+
+                <div class="card-item">
+                    <h4>ลมยาง</h4>
+                    <div class="health-bar-container">
+                        <div class="health-bar" style="width: 60%; background-color: var(--primary-color);">60%</div>
+                    </div>
+                    <p class="text-muted" style="margin-top: 10px; color: var(--primary-color); font-weight: bold;">⚠️
+                        ยางหน้าซ้าย 28 psi (ปกติควรเป็น 32 psi)</p>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // โค้ดเฉพาะหน้านี้: ตั้งค่าสถานะเริ่มต้นของ Sidebar
+        document.addEventListener('DOMContentLoaded', () => {
+            // โค้ดที่รันใน script.js (updateUI) จะจัดการเรื่องแต้มและธีมแล้ว
+        });
+    </script>
+</body>
+
+</html>

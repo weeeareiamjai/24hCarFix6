@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XO รถเขียว/รถแดง - 24hCarFix6</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* สไตล์สำหรับกระดานเกม XO */
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            width: 300px;
+            /* ขนาดกระดาน */
+            height: 300px;
+            margin: 20px auto;
+            border: 3px solid var(--border-color);
+        }
+
+        .cell {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            font-weight: bold;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: background-color 0.1s;
+        }
+
+        .cell:hover {
+            background-color: var(--bg-input);
+        }
+
+        #game-status {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .game-info {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        /* สไตล์สำหรับปุ่มรีเซ็ตในหน้านี้ */
+        .btn-reset {
+            background-color: #3fcf2e;
+            /* สีเขียว */
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .btn-reset:hover {
+            background-color: #35b328;
+        }
+    </style>
+</head>
+
+<body data-theme="dark">
+
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+    <nav class="sidebar">
+        <div class="logo">🚗 24hCarFix6</div>
+        <a href="home.html" class="menu-item">🏠 หน้าหลัก (Home)</a>
+        <a href="index.html" class="menu-item">📰 ฟีดชุมชน (Feed)</a>
+        <a href="missions.html" class="menu-item">🎯 ภารกิจ (Missions)</a>
+        <a href="rewards.html" class="menu-item">🎁 แลกรางวัล (Rewards)</a>
+        <a href="chatbot.html" class="menu-item">💬 แชทบอท (Chatbot)</a>
+        <a href="minigame.html" class="menu-item active">🕹️ มินิเกม (Mini Games)</a>
+        <a href="car_health.html" class="menu-item">💖 สุขภาพรถ (Car Health)</a>
+        <a href="shop.html" class="menu-item">🛒 ร้านค้า (Shop)</a>
+        <a href="profile.html" class="menu-item">👤 โปรไฟล์ของฉัน (My Profile)</a>
+        <a href="#" onclick="logout()" class="menu-item logout-btn">
+            🚪 ออกจากระบบ
+        </a>
+    </nav>
+
+    <main class="main-content">
+
+        <header>
+            <button onclick="toggleTheme()" class="theme-toggle-btn" id="theme-toggle-btn">
+                <span id="theme-icon"></span>
+            </button>
+            <div class="user-info">
+                <h2>XO รถเขียว/รถแดง</h2>
+                <p>คุณคือ **รถเขียว 🟢** | AI คือ **รถแดง 🔴**</p>
+            </div>
+            <div class="user-stats">
+                💎 <span id="userPoints">0</span> แต้ม
+            </div>
+        </header>
+
+        <section id="xo-game" class="page-section active" style="max-width: 600px; margin: 0 auto;">
+
+            <div class="post-card">
+                <div id="game-status">เริ่มเกม! รถเขียว 🟢 ตาคุณ!</div>
+
+                <div id="game-board">
+                </div>
+
+                <div class="game-info">
+                    ชนะ: **+100 แต้ม** | เสมอ: **+50 แต้ม**
+                </div>
+
+                <button class="btn-action btn-reset" onclick="resetGame()">เริ่มเกมใหม่</button>
+                <button class="btn-action" onclick="window.location.href='minigame.html'">กลับสู่เมนูเกม</button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

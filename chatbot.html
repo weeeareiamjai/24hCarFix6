@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แชทบอท (Chatbot) - 24hCarFix6</title>
+    <link rel="icon" href="/CarLogo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body data-theme="dark">
+
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+    <nav class="sidebar">
+        <div class="logo">🚗 24hCarFix6</div>
+        <a href="home.html" class="menu-item">🏠 หน้าหลัก (Home)</a>
+        <a href="index.html" class="menu-item">📰 ฟีดชุมชน (Feed)</a>
+        <a href="missions.html" class="menu-item">🎯 ภารกิจ (Missions)</a>
+        <a href="rewards.html" class="menu-item">🎁 แลกรางวัล (Rewards)</a>
+        <a href="chatbot.html" class="menu-item active">💬 แชทบอท (Chatbot)</a>
+        <a href="minigame.html" class="menu-item">🕹️ มินิเกม (Mini Games)</a>
+        <a href="car_health.html" class="menu-item">💖 สุขภาพรถ (Car Health)</a>
+        <a href="shop.html" class="menu-item">🛒 ร้านค้า (Shop)</a>
+        <a href="profile.html" class="menu-item">👤 โปรไฟล์ของฉัน (My Profile)</a>
+        <a href="#" onclick="logout()" class="menu-item logout-btn">
+            🚪 ออกจากระบบ
+        </a>
+    </nav>
+
+    <main class="main-content">
+        
+        <header>
+            <button onclick="toggleTheme()" class="theme-toggle-btn" id="theme-toggle-btn">
+                <span id="theme-icon"></span>
+            </button>
+            <div class="user-info">
+                <h2>คุยกับผู้ช่วย AI</h2>
+                <p>เราพร้อมตอบทุกคำถามเกี่ยวกับรถยนต์ของคุณ</p>
+            </div>
+            <div class="user-stats">
+                💎 <span id="userPoints">0</span> แต้ม
+            </div>
+        </header>
+
+        <section id="chatbot" class="page-section active">
+            <div class="post-card" id="chat-window" style="min-height: 400px; overflow-y: auto; padding-bottom: 70px;">
+                <div class="message bot-message">สวัสดีครับ! ผมคือผู้ช่วย AI ด้านรถยนต์ มีอะไรให้ผมช่วยแนะนำ หรือมีคำถามเกี่ยวกับรถยนต์ไหมครับ?</div>
+            </div>
+
+            <div id="chat-input-container" class="post-card" style="position: sticky; bottom: 0; padding: 15px; margin-top: -50px; border-radius: 0 0 12px 12px; border-top: none;">
+                <form id="chatForm" style="display: flex; gap: 10px;">
+                    <input 
+                        type="text" 
+                        id="user-input" 
+                        placeholder="พิมพ์คำถามของคุณ..." 
+                        style="flex-grow: 1; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background-color: var(--bg-input); color: var(--text-main);"
+                        required
+                    >
+                    <button type="submit" class="btn-action" style="width: 100px; margin: 0;">
+                        ส่ง
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>

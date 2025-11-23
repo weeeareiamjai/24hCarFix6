@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เข้าสู่ระบบ (Login) - 24hCarFix6</title>
+    <link rel="icon" href="/CarLogo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* --- Login Page Specific Styles --- */
+        body {
+            /* บังคับ Layout ของหน้านี้โดยเฉพาะ */
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 15px;
+            /* ลดขอบนอกลงนิดหน่อย */
+            box-sizing: border-box;
+
+            background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Overlay สีดำจางๆ */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: -1;
+        }
+
+        .login-card {
+            background-color: var(--bg-card);
+            padding: 40px;
+            /* Padding ปกติสำหรับจอคอม */
+            border-radius: 16px;
+            width: 100%;
+            max-width: 380px;
+            /* ลด Max Width ในจอคอมลงนิดนึงให้ดูกระชับ */
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--border-color);
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .login-logo {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .login-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 12px 15px;
+            /* ปรับ Padding ช่องกรอกให้พอดี */
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-input);
+            color: var(--text-main);
+            box-sizing: border-box;
+            font-family: 'Kanit', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        /* ปุ่ม Login */
+        .btn-login {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 50px;
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .btn-login:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- 📱 Mobile Responsive Adjustment (ปรับปรุงใหม่) --- */
+        @media (max-width: 480px) {
+            .login-card {
+                /* ลด Padding ลงอีกเพื่อให้กล่องเล็กลง */
+                padding: 20px 15px;
+                /* กำหนดความกว้างสูงสุดไม่ให้เต็มจอเกินไป */
+                max-width: 340px;
+                /* จัดให้อยู่กลางเสมอ (เผื่อจอเล็กมากๆ) */
+                margin: 0 auto;
+            }
+
+            .login-logo {
+                font-size: 1.6rem;
+                /* ลดขนาดโลโก้ลงอีกนิด */
+                margin-bottom: 2px;
+            }
+
+            .login-subtitle {
+                font-size: 0.85rem;
+                margin-bottom: 20px;
+            }
+
+            .login-input {
+                padding: 10px 12px;
+                /* ลดขนาดช่องกรอก */
+                font-size: 0.95rem;
+                margin-bottom: 10px;
+            }
+
+            .btn-login {
+                padding: 10px;
+                font-size: 1rem;
+            }
+
+            /* ลดขนาดข้อความสมัครสมาชิก */
+            p[style*="margin-top: 25px"] {
+                margin-top: 15px !important;
+                font-size: 0.85rem !important;
+            }
+        }
+    </style>
+</head>
+
+<body data-theme="dark">
+
+    <div class="login-card">
+        <div class="login-logo">🚗 24hCarFix6</div>
+        <p class="login-subtitle">ยินดีต้อนรับกลับสู่ชุมชนคนรักรถ</p>
+
+        <form id="loginForm">
+            <input type="text" id="username" class="login-input" placeholder="ชื่อผู้ใช้งาน (Username)" required>
+            <input type="password" class="login-input" placeholder="รหัสผ่าน (Password)" required>
+
+            <button type="submit" class="btn-login">เข้าสู่ระบบ 🚀</button>
+        </form>
+
+        <p style="margin-top: 25px; font-size: 0.9rem; color: var(--text-muted);">
+            ยังไม่มีบัญชี? <a href="#"
+                style="color: var(--primary-color); text-decoration: none; font-weight: bold;">สมัครสมาชิก</a>
+        </p>
+    </div>
+
+    <script>
+        // Logic การ Login อย่างง่าย
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const usernameBtn = document.querySelector('.btn-login');
+            const usernameInput = document.getElementById('username');
+            const username = usernameInput.value.trim();
+
+            if (username) {
+                // เปลี่ยนปุ่มเป็นสถานะกำลังโหลด
+                usernameBtn.innerHTML = 'กำลังเข้าสู่ระบบ...';
+                usernameBtn.style.opacity = '0.7';
+
+                // จำลองการโหลดนิดหน่อยให้ดูสมจริง
+                setTimeout(() => {
+                    localStorage.setItem('currentUser', username);
+                    window.location.href = 'home.html';
+                }, 800);
+            }
+        });
+    </script>
+
+</body>
+
+</html>

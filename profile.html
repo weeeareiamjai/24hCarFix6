@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>โปรไฟล์ของฉัน (My Profile) - 24hCarFix6</title>
+    <link rel="icon" href="/CarLogo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-theme="dark">
+
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+    <nav class="sidebar">
+        <div class="logo">🚗 24hCarFix6</div>
+        <a href="home.html" class="menu-item">🏠 หน้าหลัก (Home)</a>
+        <a href="index.html" class="menu-item">📰 ฟีดชุมชน (Feed)</a>
+        <a href="missions.html" class="menu-item">🎯 ภารกิจ (Missions)</a>
+        <a href="rewards.html" class="menu-item">🎁 แลกรางวัล (Rewards)</a>
+        <a href="chatbot.html" class="menu-item">💬 แชทบอท (Chatbot)</a>
+        <a href="minigame.html" class="menu-item">🕹️ มินิเกม (Mini Games)</a>
+        <a href="car_health.html" class="menu-item">💖 สุขภาพรถ (Car Health)</a>
+        <a href="shop.html" class="menu-item">🛒 ร้านค้า (Shop)</a>
+        <a href="profile.html" class="menu-item active">👤 โปรไฟล์ของฉัน (My Profile)</a>
+        <a href="#" onclick="logout()" class="menu-item logout-btn">
+            🚪 ออกจากระบบ
+        </a>
+    </nav>
+
+    <main class="main-content">
+
+        <header>
+            <button onclick="toggleTheme()" class="theme-toggle-btn" id="theme-toggle-btn">
+                <span id="theme-icon"></span>
+            </button>
+            <div class="user-info">
+                <h2>โปรไฟล์ของฉัน</h2>
+                <p>อัปเดตข้อมูลและดูสถิติการใช้งาน</p>
+            </div>
+            <div class="user-stats">
+                💎 <span id="userPoints">0</span> แต้ม
+            </div>
+        </header>
+
+        <section id="profile" class="page-section active">
+            <h3>ข้อมูลส่วนตัว</h3>
+            <div class="post-card">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div style="width: 80px; height: 80px; background: #777; border-radius: 50%;"></div>
+                    <div>
+                        <h2>Guest User</h2>
+                        <p style="color: var(--text-muted)">เข้าสู่ระบบล่าสุด: วันนี้</p>
+                    </div>
+                </div>
+                <hr style="border-color: var(--border-color); margin: 20px 0;">
+                <p><strong>ชื่อผู้ใช้:</strong> GuestUser24h</p>
+                <p><strong>ประเภทรถที่สนใจ:</strong> Sport Car / Classic Car</p>
+                <button class="btn-action" style="background-color: #555;">แก้ไขข้อมูล</button>
+            </div>
+
+            <h3 style="margin-top: 40px;">สถิติการใช้งาน</h3>
+            <div class="grid-container">
+                <div class="card-item">
+                    <h4>จำนวนโพสต์</h4>
+                    <p style="font-size: 2rem; color: var(--primary-color);">5</p>
+                </div>
+                <div class="card-item">
+                    <h4>คอมเมนต์</h4>
+                    <p style="font-size: 2rem;">12</p>
+                </div>
+                <div class="card-item">
+                    <h4>รางวัลที่แลก</h4>
+                    <p style="font-size: 2rem; color: #3fcf2e;">1</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
