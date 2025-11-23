@@ -12,6 +12,14 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname));
 
+app.use(cors()); 
+app.use(express.json()); 
+app.use(express.static(__dirname)); 
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'login.html'));
+});
+
 // สร้าง uploads directory
 const uploadDir = path.join(__dirname, 'uploads');
 if (!fs.existsSync(uploadDir)) {
