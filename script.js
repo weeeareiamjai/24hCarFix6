@@ -518,3 +518,124 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchProducts();
     }
 });
+
+
+
+//AiChatbot(Monkla🫠)
+const API_KEY = "AIzaSyD9ISa2Y_gzng75ZpKP-jOo777ZhfMZXRA"; // คีย์เดิมของเรา
+
+async function askGemini(userMessage) {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
+    const systemInstruction = `
+        บทบาท: คุณคือ "พี่ช่าง 24CarFix" ผู้เชี่ยวชาญด้านรถยนต์
+        หน้าที่: วิเคราะห์อาการรถเสียจากข้อความที่ลูกค้าบอก
+        ข้อจำกัด: ตอบสั้นๆ เข้าใจง่าย (3-5 บรรทัด) เน้นวิธีเช็กเบื้องต้น มีอีโมจิ 🔧🚗
+    `;
+    
+    const requestBody = {
+        contents: [{
+            parts: [{ text: systemInstruction + "\n\nลูกค้าถาม: " + userMessage }]
+        }]
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(requestBody)
+        });
+        const data = await response.json();
+        return data.candidates?.[0]?.content.parts[0].text || "ขอโทษครับ พี่ช่างมึนหัวนิดหน่อย 😵‍💫";
+    } catch (error) {
+        console.error(error);
+        return "ระบบขัดข้อง! (เน็ตหลุดหรือโควต้าเต็ม) 😭";
+    }
+}
+
+async function sendAIMessage() {
+    const input = document.getElementById('ai-input');
+    const chatBox = document.getElementById('chat-window');
+    const text = input.value.trim();
+    
+    if (!text) return;
+
+    // 1. ฝั่งเราพิมพ์
+    chatBox.innerHTML += `
+        <div class="chat-msg user-msg">
+            ${text}
+        </div>`;
+    
+    input.value = '';
+    chatBox.scrollTop = chatBox.scrollHeight; // เลื่อนลงล่างสุด
+
+    // 2. ขึ้นสถานะกำลังพิมพ์...
+    const loadingId = "loading-" + Date.now();
+    chatBox.innerHTML += `
+        <div id="${loadingId}" class="chat-msg ai-msg">
+            กำลังวิเคราะห์... 🔧
+        </div>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    // 3. เรียก AI
+    const reply = await askGemini(text);
+    
+    // 4. เอาตัวโหลดออก แล้วใส่คำตอบจริง
+    const loadingEl = document.getElementById(loadingId);
+    if(loadingEl) loadingEl.remove();
+
+    chatBox.innerHTML += `
+        <div class="chat-msg ai-msg">
+            ${reply}
+        </div>`;
+    
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+
+
+
+//Map(MoNkla🫠)
+function initLeafletMap() {
+    const mapElement = document.getElementById('real-leaflet-map');
+    if (!mapElement) return;
+    const map = L.map('real-leaflet-map').setView([13.7563, 100.5018], 12);
+
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    }).addTo(map);
+
+    var redIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
+    var blueIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
+    const pins = [
+        { lat: 13.7563, long: 100.5018, type: "⚠️ อุบัติเหตุ", msg: "รถชนกัน 3 คัน โปรดเลี่ยงเส้นทาง" },
+        { lat: 13.7450, long: 100.5320, type: "🔧 ช่างสมชาย", msg: "บริการ 24 ชม. โทร 081-xxxx" },
+        { lat: 13.7800, long: 100.5500, type: "🔧 อู่ลุงแดง", msg: "ซ่อมไว ไว้ใจได้" }
+    ];
+
+    pins.forEach(pin => {
+        const customIcon = pin.type.includes("อุบัติเหตุ") ? redIcon : blueIcon;       
+        L.marker([pin.lat, pin.long], { icon: customIcon }).addTo(map)
+            .bindPopup(`
+                <div style="text-align:center;">
+                    <b style="font-size:1.1rem;">${pin.type}</b><br>
+                    <span style="color:#666;">${pin.msg}</span>
+                </div>
+            `);
+    });
+}
